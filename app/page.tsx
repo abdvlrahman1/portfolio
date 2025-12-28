@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence, useMotionTemplate, useMotionValue, Variants } from 'framer-motion';
 import { 
     ArrowUpRight, Instagram, Mail, Layers, 
     Code2, Clapperboard, MonitorPlay, AppWindow, 
@@ -81,12 +81,13 @@ export default function Portfolio() {
     button: isDark ? "bg-white text-black" : "bg-black text-white"
   };
 
-  const container = {
+  // --- ANIMATION VARIANTS (FIXED TYPE ERROR) ---
+  const container: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
-  const item = {
+  const item: Variants = {
     hidden: { y: 20, opacity: 0, scale: 0.98 },
     visible: { y: 0, opacity: 1, scale: 1, transition: { duration: 0.5, ease: "backOut" } }
   };
