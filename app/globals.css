@@ -31,7 +31,11 @@
     background-color: var(--bg-main);
     color: var(--text-main);
     transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s ease;
-    overflow: hidden;
+    
+    /* UPDATED: Changed from 'hidden' to 'auto' to allow scrolling */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    min-height: 100vh;
   }
 }
 
@@ -67,6 +71,6 @@
 }
 
 /* 3. FONTS */
-.font-serif { font-family: 'Playfair Display', serif; } /* More elegant than Cormorant */
+.font-serif { font-family: 'Playfair Display', serif; }
 .font-sans { font-family: 'Inter', sans-serif; }
-.font-mono { font-family: 'JetBrains Mono', monospace; } 
+.font-mono { font-family: 'JetBrains Mono', monospace; }
