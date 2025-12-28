@@ -81,7 +81,7 @@ export default function Portfolio() {
     button: isDark ? "bg-white text-black" : "bg-black text-white"
   };
 
-  // --- ANIMATION VARIANTS (FIXED TYPE ERROR) ---
+  // --- ANIMATION VARIANTS ---
   const container: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -94,7 +94,8 @@ export default function Portfolio() {
 
   return (
     <main 
-        className={`min-h-[100dvh] w-full transition-colors duration-500 ease-in-out ${theme.bg} ${theme.text} font-sans flex flex-col items-center py-12 px-6 relative overflow-hidden`}
+        /* UPDATED: Changed overflow-hidden to overflow-x-hidden and added pb-20 for mobile spacing */
+        className={`min-h-[100dvh] w-full transition-colors duration-500 ease-in-out ${theme.bg} ${theme.text} font-sans flex flex-col items-center py-12 px-6 pb-24 relative overflow-x-hidden`}
         onMouseMove={handleMouseMove}
     >
       
@@ -110,11 +111,12 @@ export default function Portfolio() {
             mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
             z-index: 0;
             opacity: 0.5;
+            height: 100%; /* Ensures grid covers full scrollable height */
         }
       `}</style>
 
       {/* --- BACKGROUNDS --- */}
-      <div className="bg-grid pointer-events-none transition-opacity duration-500" />
+      <div className="bg-grid pointer-events-none transition-opacity duration-500 fixed inset-0" />
       <motion.div
         className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
         style={{ background: bgGradient }} 
@@ -162,7 +164,7 @@ export default function Portfolio() {
 
       {/* --- MAIN CONTENT --- */}
       <motion.div 
-        className="relative z-10 w-full max-w-lg flex flex-col items-center text-center gap-8 mt-4"
+        className="relative z-10 w-full max-w-lg flex flex-col items-center text-center gap-8 mt-12 md:mt-4"
         variants={container}
         initial="hidden"
         animate="visible"
