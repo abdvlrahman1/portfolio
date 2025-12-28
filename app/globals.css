@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- LIGHT THEME --- */
+  --bg-main: #FAFAFA;       /* Bright White-Grey */
+  --text-main: #171717;     /* Deep Black */
+  --text-muted: #737373;    /* Neutral Grey */
+  --border: #E5E5E5;        /* Light Border */
+  --glass: rgba(255, 255, 255, 0.6); /* See-through glass */
+  --blob-1: #E0E7FF;        /* Soft Blue */
+  --blob-2: #F3E8FF;        /* Soft Purple */
+  --btn-bg: #171717;        /* Black Button */
+  --btn-text: #FFFFFF;      /* White Text */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* --- DARK THEME CLASS --- */
+.dark {
+  --bg-main: #050505;       /* Pure Black */
+  --text-main: #EDEDED;     /* Soft White */
+  --text-muted: #A1A1A1;    /* Light Grey */
+  --border: #262626;        /* Dark Border */
+  --glass: rgba(10, 10, 10, 0.6); /* Dark Glass */
+  --blob-1: #1E1B4B;        /* Deep Indigo */
+  --blob-2: #3B0764;        /* Deep Violet */
+  --btn-bg: #EDEDED;        /* White Button */
+  --btn-text: #000000;      /* Black Text */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s ease;
+    overflow: hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 1. THE FLOATING BLOBS (Background) */
+.blob-cont {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
+.blob {
+  position: absolute;
+  filter: blur(90px);
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: background-color 0.6s ease;
+  animation: float 20s infinite ease-in-out alternate;
+}
+.blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--blob-1); }
+.blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: var(--blob-2); animation-delay: -10s; }
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(40px, 60px) rotate(10deg); }
+}
+
+/* 2. GLASS DOCK & CARDS */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* 3. FONTS */
+.font-serif { font-family: 'Playfair Display', serif; } /* More elegant than Cormorant */
+.font-sans { font-family: 'Inter', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; } 
